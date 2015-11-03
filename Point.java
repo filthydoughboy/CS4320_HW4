@@ -40,7 +40,7 @@ public class Point {
         for(String element: str.split(" "))
         {
             int intOfString = Integer.parseInt(element);
-            point.add(intOfString)
+            point.add(intOfString);
         }
     }
 
@@ -49,8 +49,11 @@ public class Point {
      */
     public Point(Point other)
     {
-        System.out.println("TODO");
-        System.exit(1);
+        ArrayList<String> point = new ArrayList<String>
+        for (int i = 0; i < other.size(); i++) 
+        {
+            point.add(other[i]);
+        }
     }
 
     /**
@@ -59,9 +62,7 @@ public class Point {
      */
     public int getDimension()
     {
-        System.out.println("TODO");
-        System.exit(1);
-        return 0;
+        return this.size();
     }
 
     /**
