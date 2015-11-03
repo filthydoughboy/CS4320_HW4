@@ -20,7 +20,7 @@ public class Point {
      */
     public Point(int dim)
     {
-        ArrayList<float> point = new ArrayList<float>;
+        ArrayList<Float> point = new ArrayList<float>;
         for (int i = 0; i < dim; i++) 
         {
             point.add(0.0);
@@ -36,8 +36,12 @@ public class Point {
      */
     public Point(String str)
     {
-        System.out.println("TODO");
-        System.exit(1);
+        ArrayList<String> point = new ArrayList<String>
+        for(String element: str.split(" "))
+        {
+            int intOfString = Integer.parseInt(element);
+            point.add(intOfString)
+        }
     }
 
     /**
