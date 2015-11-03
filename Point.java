@@ -69,6 +69,13 @@ public class Point {
     }
 
     /**
+    * Sets the attributes field to the argument.
+    */
+    public void setAttributes(ArrayList<Float> arg0){
+        attributes = arg0;
+    }
+
+    /**
      * Converts a point to a string.  Note that this must be formatted EXACTLY
      * for the autograder to be able to read your answer.
      * Example:
@@ -97,15 +104,16 @@ public class Point {
      */
     public int compareTo(Object o)
     {   
+        if (!(o instanceof Point)){
+            return 1;
+        }
+        Point argPoint = (Point) o;
         for (int i = 0; i < this.size(); i++) {
-            if (this.get(i) < o.get(i));
+            if (this.attributes.get(i).compareTo(o.attributes.get(i)) == 0);
             {
-                return -1;
+                continue;
             }
-            else if (this.get(i) > o.get(i));
-            {
-                return 1;
-            }
+            return this.attributes.get(i).compareTo(o.attributes.get(i));
         }
         return 0;
     }
@@ -127,7 +135,13 @@ public class Point {
      */
     public static final Point addPoints(Point x, Point y)
     {
-        for ()
+        Point temp = new Point(x.getDimension());
+        ArrayList<Float> tempAttributes = new ArrayList<Float>();
+        for (int i = 0; i < x.getDimension(); i++){
+            tempAttributes.add(x.attributes.get(i) + y.attributes.get(i));
+        }
+        temp.setAttributes(tempAttributes);
+        return temp;
     }
 
     /**
@@ -135,8 +149,12 @@ public class Point {
      */
     public static final Point multiplyScalar(Point x, float c)
     {
-        System.out.println("TODO");
-        System.exit(1);
-        return null;
+        Point temp = new Point(x.getDimension());
+        ArrayList<Float> tempAttributes = new ArrayList<Float>();
+        for (int i = 0; i < x.getDimension(); i++){
+            tempAttributes.add(x.attributes.get(i) * c);
+        }
+        temp.setAttributes(tempAttributes);
+        return temp;
     }
 }
