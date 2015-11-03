@@ -98,13 +98,13 @@ public class Point {
     public int compareTo(Object o)
     {   
         for (int i = 0; i < this.size(); i++) {
-            if (this.get(i) < o.get(i))
+            if (this.get(i) < o.get(i));
             {
-                return -1
+                return -1;
             }
-            else if (this.get(i) > o.get(i))
+            else if (this.get(i) > o.get(i));
             {
-                return 1
+                return 1;
             }
         }
         return 0;
@@ -117,7 +117,7 @@ public class Point {
     {
         float sum = 0.0;
         for (int i = 0; i < x.size(); i++) {
-            sum += (x.get(i) - y.get(i)) * (x.get(i) - y.get(i))
+            sum += (x.get(i) - y.get(i)) * (x.get(i) - y.get(i));
         }
         return (float)(Math.sqrt(sum));
     }
