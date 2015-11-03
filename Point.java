@@ -88,6 +88,7 @@ public class Point {
      * See the Hadoop documentation for more details.
      * You should order the points "lexicographically" in the order of the coordinates.
      * Comparing two points of different dimensions results in undefined behavior.
+     * @return -1 if oject > point, 0 if equal, 1 if object < point 
      */
     public int compareTo(Object o)
     {   
@@ -109,9 +110,11 @@ public class Point {
      */
     public static final float distance(Point x, Point y)
     {
-        System.out.println("TODO");
-        System.exit(1);
-        return (float)0.0;
+        float sum = 0.0;
+        for (int i = 0; i < x.size(); i++) {
+            sum += (x.get(i) - y.get(i)) * (x.get(i) - y.get(i))
+        }
+        return (float)(Math.sqrt(sum));
     }
 
     /**
