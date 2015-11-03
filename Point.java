@@ -20,8 +20,11 @@ public class Point {
      */
     public Point(int dim)
     {
-        System.out.println("TODO");
-        System.exit(1);
+        ArrayList<float> point = new ArrayList<float>;
+        for (int i = 0; i < dim; i++) 
+        {
+            point.add(0.0);
+        }
     }
 
     /**
