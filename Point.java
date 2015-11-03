@@ -96,8 +96,16 @@ public class Point {
      */
     public int compareTo(Object o)
     {   
-        System.out.println("TODO");
-        System.exit(1);
+        for (int i = 0; i < this.size(); i++) {
+            if (this.get(i) < o.get(i))
+            {
+                return -1
+            }
+            else if (this.get(i) > o.get(i))
+            {
+                return 1
+            }
+        }
         return 0;
     }
 
