@@ -18,12 +18,15 @@ public class Point {
      * For example:
      * Constructing a Point(2) should create a point (x_0 = 0, x_1 = 0)
      */
+
+    ArrayList<Float> attributes; // Field that stores ArrayList of attributes of the Point
+
     public Point(int dim)
     {
-        ArrayList<Float> point = new ArrayList<float>;
+        attributes = new ArrayList<Float>();
         for (int i = 0; i < dim; i++) 
         {
-            point.add(0.0);
+            attributes.add(0.0);
         }
     }
 
@@ -36,11 +39,11 @@ public class Point {
      */
     public Point(String str)
     {
-        ArrayList<String> point = new ArrayList<String>
+        attributes = new ArrayList<Float>();
         for(String element: str.split(" "))
         {
             int intOfString = Integer.parseInt(element);
-            point.add(intOfString);
+            attributes.add(intOfString);
         }
     }
 
@@ -49,10 +52,10 @@ public class Point {
      */
     public Point(Point other)
     {
-        ArrayList<String> point = new ArrayList<String>
-        for (int i = 0; i < other.size(); i++) 
+        ArrayList<Float> attributes = new ArrayList<Float>();
+        for (int i = 0; i < other.getDimension(); i++) 
         {
-            point.add(other.get(i));
+            attributes.add(other.get(i));
         }
     }
 
@@ -62,7 +65,7 @@ public class Point {
      */
     public int getDimension()
     {
-        return this.size();
+        return attributes.size();
     }
 
     /**
@@ -75,11 +78,13 @@ public class Point {
     public String toString()
     {
         String toReturn = "";
-        for (int i = 0; i < this.size(); i++)
+        for (int i = 0; i < this.getDimension() - 1; i++)
         {
-            String asString = Integer.toString(this.get(i)); 
-            toReturn += asString;
+            String asString = Integer.toString(attributes.get(i)); 
+            toReturn += asString + " ";
         }
+        String asString = Integer.toString(attributes.get(this.getDimension() - 1));
+        toReturn += asString + " ";
         return toReturn;
     }
 
@@ -122,9 +127,7 @@ public class Point {
      */
     public static final Point addPoints(Point x, Point y)
     {
-        System.out.println("TODO");
-        System.exit(1);
-        return null;
+        for ()
     }
 
     /**
