@@ -1,0 +1,17 @@
+javac -classpath /opt/hadoop-2.7.1/share/hadoop/common/*:/opt/hadoop-2.7.1/share/hadoop/yarn/lib/*:/opt/hadoop-2.7.1/share/hadoop/mapreduce/lib/*:/opt/hadoop-2.7.1/share/hadoop/mapreduce/*:./  ClusterToPointReducer.java
+javac -classpath /opt/hadoop-2.7.1/share/hadoop/common/*:/opt/hadoop-2.7.1/share/hadoop/yarn/lib/*:/opt/hadoop-2.7.1/share/hadoop/mapreduce/lib/*:/opt/hadoop-2.7.1/share/hadoop/mapreduce/*:./  HelperTests.java
+javac -classpath /opt/hadoop-2.7.1/share/hadoop/common/*:/opt/hadoop-2.7.1/share/hadoop/yarn/lib/*:/opt/hadoop-2.7.1/share/hadoop/mapreduce/lib/*:/opt/hadoop-2.7.1/share/hadoop/mapreduce/*:./  KMeans.java
+Note: KMeans.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+javac -classpath /opt/hadoop-2.7.1/share/hadoop/common/*:/opt/hadoop-2.7.1/share/hadoop/yarn/lib/*:/opt/hadoop-2.7.1/share/hadoop/mapreduce/lib/*:/opt/hadoop-2.7.1/share/hadoop/mapreduce/*:./  PointToClusterMapper.java
+jar cvf KMeans.jar *.class
+added manifest
+adding: ClusterToPointReducer.class(in = 405) (out= 223)(deflated 44%)
+adding: HelperTests.class(in = 1416) (out= 736)(deflated 48%)
+adding: KMeans$FileMapper.class(in = 1548) (out= 674)(deflated 56%)
+adding: KMeans$FileReducer.class(in = 2092) (out= 1010)(deflated 51%)
+adding: KMeans.class(in = 5823) (out= 2977)(deflated 48%)
+adding: Point.class(in = 1077) (out= 506)(deflated 53%)
+adding: PointToClusterMapper.class(in = 401) (out= 226)(deflated 43%)
+adding: UpdateJobRunner.class(in = 689) (out= 409)(deflated 40%)
+rm -rf output/
