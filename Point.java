@@ -52,7 +52,7 @@ public class Point {
         ArrayList<String> point = new ArrayList<String>
         for (int i = 0; i < other.size(); i++) 
         {
-            point.add(other[i]);
+            point.add(other.get(i));
         }
     }
 
@@ -74,9 +74,13 @@ public class Point {
      */
     public String toString()
     {
-        System.out.println("TODO");
-        System.exit(1);
-        return null;
+        String toReturn = "";
+        for (int i = 0; i < this.size(); i++)
+        {
+            String asString = Integer.toString(this.get(i)); 
+            toReturn += asString;
+        }
+        return toReturn;
     }
 
     /**
