@@ -1,0 +1,100 @@
+javac -classpath /opt/hadoop-2.7.1/share/hadoop/common/*:/opt/hadoop-2.7.1/share/hadoop/yarn/lib/*:/opt/hadoop-2.7.1/share/hadoop/mapreduce/lib/*:/opt/hadoop-2.7.1/share/hadoop/mapreduce/*:./  Point.java
+Point.java:29: error: no suitable method found for add(double)
+            attributes.add(0.0);
+                      ^
+    method ArrayList.add(int,Float) is not applicable
+      (actual and formal argument lists differ in length)
+    method ArrayList.add(Float) is not applicable
+      (actual argument double cannot be converted to Float by method invocation conversion)
+    method AbstractList.add(int,Float) is not applicable
+      (actual and formal argument lists differ in length)
+    method AbstractList.add(Float) is not applicable
+      (actual argument double cannot be converted to Float by method invocation conversion)
+    method AbstractCollection.add(Float) is not applicable
+      (actual argument double cannot be converted to Float by method invocation conversion)
+Point.java:46: error: no suitable method found for add(int)
+            attributes.add(intOfString);
+                      ^
+    method ArrayList.add(int,Float) is not applicable
+      (actual and formal argument lists differ in length)
+    method ArrayList.add(Float) is not applicable
+      (actual argument int cannot be converted to Float by method invocation conversion)
+    method AbstractList.add(int,Float) is not applicable
+      (actual and formal argument lists differ in length)
+    method AbstractList.add(Float) is not applicable
+      (actual argument int cannot be converted to Float by method invocation conversion)
+    method AbstractCollection.add(Float) is not applicable
+      (actual argument int cannot be converted to Float by method invocation conversion)
+Point.java:58: error: cannot find symbol
+            attributes.add(other.get(i));
+                                ^
+  symbol:   method get(int)
+  location: variable other of type Point
+Point.java:90: error: no suitable method found for toString(Float)
+            String asString = Integer.toString(attributes.get(i)); 
+                                     ^
+    method Integer.toString() is not applicable
+      (actual and formal argument lists differ in length)
+    method Integer.toString(int) is not applicable
+      (actual argument Float cannot be converted to int by method invocation conversion)
+    method Integer.toString(int,int) is not applicable
+      (actual and formal argument lists differ in length)
+    method Object.toString() is not applicable
+      (actual and formal argument lists differ in length)
+Point.java:93: error: no suitable method found for toString(Float)
+        String asString = Integer.toString(attributes.get(this.getDimension() - 1));
+                                 ^
+    method Integer.toString() is not applicable
+      (actual and formal argument lists differ in length)
+    method Integer.toString(int) is not applicable
+      (actual argument Float cannot be converted to int by method invocation conversion)
+    method Integer.toString(int,int) is not applicable
+      (actual and formal argument lists differ in length)
+    method Object.toString() is not applicable
+      (actual and formal argument lists differ in length)
+Point.java:111: error: cannot find symbol
+        for (int i = 0; i < this.size(); i++) {
+                                ^
+  symbol: method size()
+Point.java:112: error: cannot find symbol
+            if (this.attributes.get(i).compareTo(o.attributes.get(i)) == 0);
+                                                  ^
+  symbol:   variable attributes
+  location: variable o of type Object
+Point.java:116: error: cannot find symbol
+            return this.attributes.get(i).compareTo(o.attributes.get(i));
+                                                     ^
+  symbol:   variable attributes
+  location: variable o of type Object
+Point.java:126: error: possible loss of precision
+        float sum = 0.0;
+                    ^
+  required: float
+  found:    double
+Point.java:127: error: cannot find symbol
+        for (int i = 0; i < x.size(); i++) {
+                             ^
+  symbol:   method size()
+  location: variable x of type Point
+Point.java:128: error: cannot find symbol
+            sum += (x.get(i) - y.get(i)) * (x.get(i) - y.get(i));
+                     ^
+  symbol:   method get(int)
+  location: variable x of type Point
+Point.java:128: error: cannot find symbol
+            sum += (x.get(i) - y.get(i)) * (x.get(i) - y.get(i));
+                                ^
+  symbol:   method get(int)
+  location: variable y of type Point
+Point.java:128: error: cannot find symbol
+            sum += (x.get(i) - y.get(i)) * (x.get(i) - y.get(i));
+                                             ^
+  symbol:   method get(int)
+  location: variable x of type Point
+Point.java:128: error: cannot find symbol
+            sum += (x.get(i) - y.get(i)) * (x.get(i) - y.get(i));
+                                                        ^
+  symbol:   method get(int)
+  location: variable y of type Point
+14 errors
+make: *** [Point.class] Error 1
