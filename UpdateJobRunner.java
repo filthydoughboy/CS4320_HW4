@@ -27,9 +27,10 @@ public class UpdateJobRunner
     public static Job createUpdateJob(int jobId, String inputDirectory, String outputDirectory)
         throws IOException
     {
-        System.out.println("TODO");
-        System.exit(1);
-        return null;
+        Job temp = Job.getInstance();
+        temp.setJobName(jobId + "");
+        temp.setMapperClass(PointToClusterMapper);
+        temp.setReducerClass(ClusterToPointReducer);
     }
 
     /**
