@@ -26,7 +26,7 @@ public class Point {
         attributes = new ArrayList<Float>();
         for (int i = 0; i < dim; i++) 
         {
-            attributes.add(0.0);
+            attributes.add(new Float(0.0));
         }
     }
 
@@ -42,7 +42,7 @@ public class Point {
         attributes = new ArrayList<Float>();
         for(String element: str.split(" "))
         {
-            int intOfString = Integer.parseInt(element);
+            Float intOfString = Float.parseFloat(element);
             attributes.add(intOfString);
         }
     }
@@ -55,7 +55,7 @@ public class Point {
         ArrayList<Float> attributes = new ArrayList<Float>();
         for (int i = 0; i < other.getDimension(); i++) 
         {
-            attributes.add(other.get(i));
+            attributes.add(other.attributes.get(i));
         }
     }
 
@@ -87,11 +87,11 @@ public class Point {
         String toReturn = "";
         for (int i = 0; i < this.getDimension() - 1; i++)
         {
-            String asString = Integer.toString(attributes.get(i)); 
+            String asString = Float.toString(attributes.get(i)); 
             toReturn += asString + " ";
         }
-        String asString = Integer.toString(attributes.get(this.getDimension() - 1));
-        toReturn += asString + " ";
+        String asString = Float.toString(attributes.get(this.getDimension() - 1));
+        toReturn += asString;
         return toReturn;
     }
 
@@ -108,12 +108,12 @@ public class Point {
             return 1;
         }
         Point argPoint = (Point) o;
-        for (int i = 0; i < this.size(); i++) {
-            if (this.attributes.get(i).compareTo(o.attributes.get(i)) == 0);
+        for (int i = 0; i < this.getDimension(); i++) {
+            if (this.attributes.get(i).compareTo(argPoint.attributes.get(i)) == 0)
             {
                 continue;
             }
-            return this.attributes.get(i).compareTo(o.attributes.get(i));
+            return this.attributes.get(i).compareTo(argPoint.attributes.get(i));
         }
         return 0;
     }
@@ -123,9 +123,9 @@ public class Point {
      */
     public static final float distance(Point x, Point y)
     {
-        float sum = 0.0;
-        for (int i = 0; i < x.size(); i++) {
-            sum += (x.get(i) - y.get(i)) * (x.get(i) - y.get(i));
+        float sum = new Float(0.0);
+        for (int i = 0; i < x.getDimension(); i++) {
+            sum += (x.attributes.get(i) - y.attributes.get(i)) * (x.attributes.get(i) - y.attributes.get(i));
         }
         return (float)(Math.sqrt(sum));
     }
