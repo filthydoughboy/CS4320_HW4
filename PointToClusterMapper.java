@@ -9,13 +9,13 @@ import java.io.IOException;
  * You can modify this class as you see fit.  You may assume that the global
  * centroids have been correctly initialized.
  */
-public class PointToClusterMapper extends Mapper<Text, Text, Text, Text>
+public class PointToClusterMapper extends Mapper<Point, Point, Point, Point>
 {
-	public PointToClusterMapper(){
-
-	}
-
-	public void map(Point key, ArrayList<Point> values, OutputCollector<Point, Point> argOutput, Reporter argReporter){
+	/**
+	* For each Point in values, iterate through all the centroids and find the one closest to that Point.
+	* Then, add each Point as a value with the closest centroid as the key.
+	*/
+	public void map(Point key, ArrayList<Point> values, Context context) throws IOException, InterruptedException{
 		ArrayList<Point> tempCentroids = KMeans.centroids;
 		for (int i = 0; i < values.size(); i++){
 			Point newCentroid = key;
@@ -24,7 +24,7 @@ public class PointToClusterMapper extends Mapper<Text, Text, Text, Text>
 					newCentroid = tempCentroids.get(j);
 				}
 			}
-			argOutput.collect(newCentroid, values.get(i));
+			context.write(newCentroid, values.get(i));
 		}
 	}
 }

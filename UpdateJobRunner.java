@@ -27,10 +27,18 @@ public class UpdateJobRunner
     public static Job createUpdateJob(int jobId, String inputDirectory, String outputDirectory)
         throws IOException
     {
-        Job temp = Job.getInstance();
-        temp.setJobName(jobId + "");
-        temp.setMapperClass(PointToClusterMapper);
-        temp.setReducerClass(ClusterToPointReducer);
+        Job ourJob = new Job(new Configuration(), jobID + "");
+        our_job.setJarByClass(KMeans.class);
+        our_job.setMapperClass(PointToClusterMapper.class);
+        our_job.setMapOutputKeyClass(Point.class);
+        our_job.setMapOutputValueClass(Point.class);
+        our_job.setReducerClass(ClusterToPointReducer.class);
+        our_job.setOutputKeyClass(Point.class);
+        our_job.setOutputValueClass(Point.class);
+        FileInputFormat.addInputPath(our_job, new Path(inputDirectory));
+        FileOutputFormat.setOutputPath(our_job, new Path(outputDirectory));
+        our_job.setInputFormatClass(KeyValueTextInputFormat.class);
+        return our_job;
     }
 
     /**
