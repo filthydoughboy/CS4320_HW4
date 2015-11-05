@@ -14,6 +14,9 @@ import java.util.ArrayList;
 
 public class UpdateJobRunner
 {
+
+    static float EPSILON = (float) .00001;
+
     /**
      * Create a map-reduce job to update the current centroids.
      * @param jobId Some arbitrary number so that Hadoop can create a directory "<outputDirectory>/<jobname>_<jobId>"
@@ -27,7 +30,7 @@ public class UpdateJobRunner
     public static Job createUpdateJob(int jobId, String inputDirectory, String outputDirectory)
         throws IOException
     {
-        Job ourJob = new Job(new Configuration(), jobID + "");
+        Job our_job = new Job(new Configuration(), jobId + "");
         our_job.setJarByClass(KMeans.class);
         our_job.setMapperClass(PointToClusterMapper.class);
         our_job.setMapOutputKeyClass(Point.class);
@@ -59,8 +62,35 @@ public class UpdateJobRunner
     public static int runUpdateJobs(int maxIterations, String inputDirectory,
         String outputDirectory)
     {
-        System.out.println("TODO");
-        System.exit(1);
-        return 0;
+        int iterations = 0;
+        ArrayList<Point> oldCentroid = KMeans.centroids;
+        try{
+            Job tempJob = createUpdateJob(iterations, inputDirectory, outputDirectory);
+            tempJob.waitForCompletion(true);
+        } catch (Exception e){
+            System.out.println("You messed up in UpdateJobRunner runUpdateJobs 1");
+        }
+        iterations++;
+        while (compareCentroids(oldCentroid, KMeans.centroids) && iterations < maxIterations){
+            oldCentroid = KMeans.centroids;
+            try{
+                Job tempJob = createUpdateJob(iterations, inputDirectory, outputDirectory);
+                tempJob.waitForCompletion(true);
+            } catch (Exception e){
+                System.out.println("You messed up in UpdateJobRunner runUpdateJobs 2");
+            }
+            iterations++;
+        }
+        return iterations;
+    }
+
+
+    private static boolean compareCentroids(ArrayList<Point> argOld, ArrayList<Point> argNew){
+        for (int i = 0; i < argOld.size(); i++){
+            if (Point.distance(argOld.get(i),argNew.get(i)) > EPSILON){
+                return false;
+            }
+        }
+        return true;
     }
 }
