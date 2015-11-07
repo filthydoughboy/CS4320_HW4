@@ -4,12 +4,14 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.ArrayList;
 
 /** 
  * You can modify this class as you see fit, as long as you correctly update the
  * global centroids.
  */
-public class ClusterToPointReducer extends Reducer<Point, Point, Point, Point>
+public class ClusterToPointReducer extends Reducer<Point, Point, Point, ArrayList<Point>>
 {
 	/**
 	* Add up all the Points in values and divide by the number of Points in them. Output a key value
@@ -17,7 +19,7 @@ public class ClusterToPointReducer extends Reducer<Point, Point, Point, Point>
 	*
 	*
 	*/
-	public void reduce(Point key, Iterator<Point> values, Context context)throws IOException, InterruptedException{
+	public void reduce(Point key, Iterator<Point> values, Context context) throws IOException, InterruptedException{
 		int numberOfPoints = 0;
 		if (!(values.hasNext())){
 			return;
@@ -35,5 +37,8 @@ public class ClusterToPointReducer extends Reducer<Point, Point, Point, Point>
 		}
 		accumulatedPoint = Point.multiplyScalar(accumulatedPoint, 1/((float) numberOfPoints));
 		context.write(accumulatedPoint, accumulatedArrayList);
+		ArrayList<Point> tempCentroids = KMeans.centroids;
+		int index = tempCentroids.indexOf(key);
+		tempCentroids.set(index, accumulatedPoint);
 	}
 }

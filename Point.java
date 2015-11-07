@@ -12,7 +12,7 @@ import org.apache.hadoop.io.*; // Writable
  * NOTE: This implementation is NOT complete.  As mentioned above, you need
  * to implement WritableComparable at minimum.  Modify this class as you see fit.
  */
-public class Point {
+public class Point implements WritableComparable<Point>{
     /**
      * Construct a Point with the given dimensions [dim]. The coordinates should all be 0.
      * For example:
@@ -116,6 +116,14 @@ public class Point {
             return this.attributes.get(i).compareTo(argPoint.attributes.get(i));
         }
         return 0;
+    }
+
+    public void readFields(DataInput in){
+
+    }
+
+    public void write(DataOutput out) throws IOException{
+        
     }
 
     /**
