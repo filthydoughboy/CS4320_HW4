@@ -30,7 +30,7 @@ public class UpdateJobRunner
     public static Job createUpdateJob(int jobId, String inputDirectory, String outputDirectory)
         throws IOException
     {
-        Job our_job = new Job(new Configuration(), "ours");
+        Job our_job = new Job(new Configuration(), "ours" + jobId);
         our_job.setJarByClass(KMeans.class);
         our_job.setMapperClass(PointToClusterMapper.class);
         our_job.setMapOutputKeyClass(Point.class);

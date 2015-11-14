@@ -119,11 +119,13 @@ public class Point implements WritableComparable<Point>{
     }
 
     public void readFields(DataInput in){
-
+        
     }
 
     public void write(DataOutput out) throws IOException{
-        
+        for (int i = 0; i < attributes.size(); i++){
+            out.writeInt(attributes.get(i));
+        }
     }
 
     /**
