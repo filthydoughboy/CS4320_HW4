@@ -13,13 +13,25 @@ import org.apache.hadoop.io.*; // Writable
  * to implement WritableComparable at minimum.  Modify this class as you see fit.
  */
 public class Point implements WritableComparable<Point>{
+    
+    ArrayList<Float> attributes; // Field that stores ArrayList of attributes of the Point
+    
+    /**
+     * Construct a Point with the dimension 1
+     * For example:
+     * Constructing a Point() will create a point (x_0 = 0)
+     */
+    public Point()
+    {
+        attributes = new ArrayList<Float>();
+        attributes.add(new Float(0.0));
+        
+    }
     /**
      * Construct a Point with the given dimensions [dim]. The coordinates should all be 0.
      * For example:
      * Constructing a Point(2) should create a point (x_0 = 0, x_1 = 0)
      */
-
-    ArrayList<Float> attributes; // Field that stores ArrayList of attributes of the Point
 
     public Point(int dim)
     {
@@ -64,8 +76,13 @@ public class Point implements WritableComparable<Point>{
      * a dimension of 2.
      */
     public int getDimension()
-    {
-        return attributes.size();
+    {   
+        if (attributes != null) {
+            return attributes.size();
+        }
+        else{
+            return 0;
+        }
     }
 
     /**
@@ -118,8 +135,9 @@ public class Point implements WritableComparable<Point>{
         return 0;
     }
 
-    public void readFields(DataInput in){
-        
+    public void readFields(DataInput in) throws IOException{
+        System.out.println("READFIELDS IN CALLED\n\n");
+        System.out.println("'in' is : "+in.readLine());
     }
 
     public void write(DataOutput out) throws IOException{

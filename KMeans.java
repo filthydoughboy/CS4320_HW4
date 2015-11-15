@@ -80,6 +80,7 @@ public class KMeans {
         public void map(Text key, Text value, Context context)
             throws IOException, InterruptedException
         {
+            System.out.println("key is "+key+"\n\n");
             Point p = new Point(key.toString());    
             assertTrue(p.getDimension() == dimension, "Invalid Dimension");
             // Map all the points to the same key, so reducer can find centroids
@@ -102,7 +103,8 @@ public class KMeans {
             ArrayList<Point> pts = new ArrayList<Point>();
             int counter = 0;
             for (Point p : values)
-            {
+            {   
+                System.out.println("new point is: "+p+"\n\n");
                 pts.add(new Point(p));
                 context.write(new IntWritable(counter), p);
                 ++counter;
