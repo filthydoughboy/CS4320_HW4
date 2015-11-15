@@ -102,7 +102,7 @@ public class Point implements WritableComparable<Point>{
      * Comparing two points of different dimensions results in undefined behavior.
      * @return -1 if oject > point, 0 if equal, 1 if object < point 
      */
-    public int compareTo(Object o)
+    public int compareTo(Point o)
     {   
         if (!(o instanceof Point)){
             return 1;
@@ -124,7 +124,7 @@ public class Point implements WritableComparable<Point>{
 
     public void write(DataOutput out) throws IOException{
         for (int i = 0; i < attributes.size(); i++){
-            out.writeInt(attributes.get(i));
+            out.writeFloat(attributes.get(i));
         }
     }
 
