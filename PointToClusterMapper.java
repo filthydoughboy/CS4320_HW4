@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * You can modify this class as you see fit.  You may assume that the global
  * centroids have been correctly initialized.
  */
-public class PointToClusterMapper extends Mapper<Point, Point, Point, Point>
+public class PointToClusterMapper extends Mapper<Point, ArrayList<Point>, Point, Point>
 {
 	/**
 	* For each Point in values, iterate through all the centroids and find the one closest to that Point.
