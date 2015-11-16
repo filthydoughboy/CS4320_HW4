@@ -30,22 +30,18 @@ public class UpdateJobRunner
     public static Job createUpdateJob(int jobId, String inputDirectory, String outputDirectory)
         throws IOException
     {
-        //System.out.println("ours"+jobId);
-        System.out.println(inputDirectory);
-        System.out.println(outputDirectory);
-
-        Job our_job = new Job(new Configuration(), "ours" + jobId);
-        our_job.setJarByClass(KMeans.class);
-        our_job.setMapperClass(PointToClusterMapper.class);
-        our_job.setMapOutputKeyClass(Point.class);
-        our_job.setMapOutputValueClass(Point.class);
-        our_job.setReducerClass(ClusterToPointReducer.class);
-        our_job.setOutputKeyClass(Point.class);
-        our_job.setOutputValueClass(Point.class);
-        FileInputFormat.addInputPath(our_job, new Path(inputDirectory));
-        FileOutputFormat.setOutputPath(our_job, new Path(outputDirectory));
-        our_job.setInputFormatClass(KeyValueTextInputFormat.class);
-        return our_job;
+        Job ourjob = new Job(new Configuration(), "ours" + jobId);
+        ourjob.setJarByClass(KMeans.class);
+        ourjob.setMapperClass(PointToClusterMapper.class);
+        ourjob.setMapOutputKeyClass(Point.class);
+        ourjob.setMapOutputValueClass(Point.class);
+        ourjob.setReducerClass(ClusterToPointReducer.class);
+        ourjob.setOutputKeyClass(Point.class);
+        ourjob.setOutputValueClass(Point.class);
+        FileInputFormat.addInputPath(ourjob, new Path(inputDirectory));
+        FileOutputFormat.setOutputPath(ourjob, new Path(outputDirectory + jobId));
+        ourjob.setInputFormatClass(KeyValueTextInputFormat.class);
+        return ourjob;
     }
 
     /**
@@ -69,19 +65,20 @@ public class UpdateJobRunner
         int iterations = 0;
         ArrayList<Point> oldCentroid = KMeans.centroids;
         try{
-            System.out.println("output directory is : "+outputDirectory+"\n");
             Job tempJob = createUpdateJob(iterations, inputDirectory, outputDirectory);
             tempJob.waitForCompletion(true);
         } catch (Exception e){
+            e.printStackTrace();
             System.out.println("You messed up in UpdateJobRunner runUpdateJobs 1");
         }
         iterations++;
-        while (compareCentroids(oldCentroid, KMeans.centroids) && iterations < maxIterations){
+        while (!compareCentroids(oldCentroid, KMeans.centroids) && iterations < maxIterations){
             oldCentroid = KMeans.centroids;
             try{
                 Job tempJob = createUpdateJob(iterations, inputDirectory, outputDirectory);
                 tempJob.waitForCompletion(true);
             } catch (Exception e){
+                e.printStackTrace();
                 System.out.println("You messed up in UpdateJobRunner runUpdateJobs 2");
             }
             iterations++;

@@ -80,7 +80,7 @@ public class KMeans {
         public void map(Text key, Text value, Context context)
             throws IOException, InterruptedException
         {
-            System.out.println("key is "+key+"\n\n");
+            System.out.println(key.toString()); 
             Point p = new Point(key.toString());    
             assertTrue(p.getDimension() == dimension, "Invalid Dimension");
             // Map all the points to the same key, so reducer can find centroids
@@ -103,14 +103,12 @@ public class KMeans {
             ArrayList<Point> pts = new ArrayList<Point>();
             int counter = 0;
             for (Point p : values)
-            {   
-                System.out.println("new point is: "+p+"\n\n");
+            {
                 pts.add(new Point(p));
                 context.write(new IntWritable(counter), p);
                 ++counter;
             }
             assertTrue(k <= pts.size(), "k too high");
-
             // To choose k elements to be the starting centroids, we will shuffle the list and choose
             // the first k elements.
             Collections.shuffle(pts, rng);
@@ -224,12 +222,12 @@ public class KMeans {
         {
             Job initJob = createInitializationJob(inputDirectory, outputDirectory);
             initJob.waitForCompletion(true);
+            System.out.println("This is the randomly chosen centroids " + centroids);
         }
 
         // At this point, the centroids have been initialized.  This calls the student implemented
         // Jobs.
         int iters = UpdateJobRunner.runUpdateJobs(10, inputDirectory, outputDirectory);
-
         System.out.println("============================");
         System.out.println("KMeans execution successful.");
         System.out.println("----------------------------");

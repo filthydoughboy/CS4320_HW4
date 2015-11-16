@@ -49,3 +49,10 @@ ktest2:
 	rm -rf output/
 	rm -f centroids
 	CLASSPATH=$(CLASS_PATH) $(HADOOP) jar $(MAIN).jar $(MAIN) 4 2 kmeans_test2/points/points1.txt output kmeans_test2/centroids/centroids.txt
+
+# Type "make ourtest1" to run our student made test, which has one cluster in each of the 4 quadrants.
+# Make sure to compile first.
+ourtest1:
+	rm -rf output/
+	rm -f centroids
+	CLASSPATH=$(CLASS_PATH) $(HADOOP) jar $(MAIN).jar $(MAIN) 2 2 student_test1/points/points1.txt output student_test1/centroids/centroids.txt

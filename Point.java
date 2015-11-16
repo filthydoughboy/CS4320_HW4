@@ -13,25 +13,17 @@ import org.apache.hadoop.io.*; // Writable
  * to implement WritableComparable at minimum.  Modify this class as you see fit.
  */
 public class Point implements WritableComparable<Point>{
-    
-    ArrayList<Float> attributes; // Field that stores ArrayList of attributes of the Point
-    
-    /**
-     * Construct a Point with the dimension 1
-     * For example:
-     * Constructing a Point() will create a point (x_0 = 0)
-     */
-    public Point()
-    {
-        attributes = new ArrayList<Float>();
-        attributes.add(new Float(0.0));
-        
-    }
     /**
      * Construct a Point with the given dimensions [dim]. The coordinates should all be 0.
      * For example:
      * Constructing a Point(2) should create a point (x_0 = 0, x_1 = 0)
      */
+
+    ArrayList<Float> attributes; // Field that stores ArrayList of attributes of the Point
+
+    public Point(){
+        attributes = new ArrayList<Float>();
+    }
 
     public Point(int dim)
     {
@@ -64,10 +56,10 @@ public class Point implements WritableComparable<Point>{
      */
     public Point(Point other)
     {
-        ArrayList<Float> attributes = new ArrayList<Float>();
+        attributes = new ArrayList<Float>();
         for (int i = 0; i < other.getDimension(); i++) 
         {
-            attributes.add(other.attributes.get(i));
+            attributes.add(new Float(other.attributes.get(i)));
         }
     }
 
@@ -76,13 +68,8 @@ public class Point implements WritableComparable<Point>{
      * a dimension of 2.
      */
     public int getDimension()
-    {   
-        if (attributes != null) {
-            return attributes.size();
-        }
-        else{
-            return 0;
-        }
+    {
+        return attributes.size();
     }
 
     /**
@@ -119,25 +106,45 @@ public class Point implements WritableComparable<Point>{
      * Comparing two points of different dimensions results in undefined behavior.
      * @return -1 if oject > point, 0 if equal, 1 if object < point 
      */
-    public int compareTo(Point o)
-    {   
-        if (!(o instanceof Point)){
-            return 1;
-        }
-        Point argPoint = (Point) o;
-        for (int i = 0; i < this.getDimension(); i++) {
-            if (this.attributes.get(i).compareTo(argPoint.attributes.get(i)) == 0)
-            {
+    // @Override
+    // public int compareTo(Object o)
+    // {   
+    //     if (!(o instanceof Point)){
+    //         return 1;
+    //     }
+    //     Point argPoint = (Point) o;
+    //     for (int i = 0; i < this.getDimension(); i++) {
+    //         if (this.attributes.get(i).compareTo(argPoint.attributes.get(i)) == 0)
+    //         {
+    //             continue;
+    //         }
+    //         return this.attributes.get(i).compareTo(argPoint.attributes.get(i));
+    //     }
+    //     return 0;
+    // }
+
+    @Override
+    public int compareTo(Point p){
+        for (int i = 0; i < this.getDimension(); i++){
+            if (this.attributes.get(i).compareTo(p.attributes.get(i)) == 0){
                 continue;
             }
-            return this.attributes.get(i).compareTo(argPoint.attributes.get(i));
+            return this.attributes.get(i).compareTo(p.attributes.get(i));
         }
         return 0;
     }
 
-    public void readFields(DataInput in) throws IOException{
-        System.out.println("READFIELDS IN CALLED\n\n");
-        System.out.println("'in' is : "+in.readLine());
+    public void readFields(DataInput in){
+        attributes = new ArrayList<Float>();
+        while(true){
+            try{
+                Float temp = in.readFloat();
+                attributes.add(temp);
+            } catch (Exception e){
+                break;
+                //e.printStackTrace();
+            }
+        }
     }
 
     public void write(DataOutput out) throws IOException{
@@ -184,5 +191,14 @@ public class Point implements WritableComparable<Point>{
         }
         temp.setAttributes(tempAttributes);
         return temp;
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if (!(o instanceof Point)){
+            return false;
+        }
+        Point temp = (Point) o;
+        return this.compareTo(temp) == 0;
     }
 }

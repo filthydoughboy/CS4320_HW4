@@ -13,6 +13,7 @@ import java.util.ArrayList;
  */
 public class ClusterToPointReducer extends Reducer<Point, Point, Point, Point>
 {
+
 	/**
 	* Add up all the Points in iteratorVersion and divide by the number of Points in them. Output a key value
 	* pair where the key is the new centroid and the value is an ArrayList of all the Points in iteratorVersion.
@@ -27,12 +28,12 @@ public class ClusterToPointReducer extends Reducer<Point, Point, Point, Point>
 			return;
 		}
 		ArrayList<Point> accumulatedArrayList = new ArrayList<Point>();
-		Point temp = iteratorVersion.next();
+		Point temp = new Point(iteratorVersion.next());
 		Point accumulatedPoint = temp;
 		accumulatedArrayList.add(temp);
 		numberOfPoints++;
 		while (iteratorVersion.hasNext()){
-			temp = iteratorVersion.next();
+			temp = new Point(iteratorVersion.next());
 			accumulatedArrayList.add(temp);
 			accumulatedPoint = Point.addPoints(accumulatedPoint, temp);
 			numberOfPoints++;
