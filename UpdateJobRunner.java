@@ -63,7 +63,7 @@ public class UpdateJobRunner
         String outputDirectory)
     {
         int iterations = 0;
-        ArrayList<Point> oldCentroid = KMeans.centroids;
+        ArrayList<Point> oldCentroid = (ArrayList<Point>)KMeans.centroids.clone();
         try{
             Job tempJob = createUpdateJob(iterations, inputDirectory, outputDirectory);
             tempJob.waitForCompletion(true);
@@ -73,7 +73,7 @@ public class UpdateJobRunner
         }
         iterations++;
         while (!compareCentroids(oldCentroid, KMeans.centroids) && iterations < maxIterations){
-            oldCentroid = KMeans.centroids;
+            oldCentroid = (ArrayList<Point>)KMeans.centroids.clone();
             try{
                 Job tempJob = createUpdateJob(iterations, inputDirectory, outputDirectory);
                 tempJob.waitForCompletion(true);
