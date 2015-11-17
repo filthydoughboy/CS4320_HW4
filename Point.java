@@ -99,30 +99,6 @@ public class Point implements WritableComparable<Point>{
         return toReturn;
     }
 
-    /**
-     * One of the WritableComparable methods you need to implement.
-     * See the Hadoop documentation for more details.
-     * You should order the points "lexicographically" in the order of the coordinates.
-     * Comparing two points of different dimensions results in undefined behavior.
-     * @return -1 if oject > point, 0 if equal, 1 if object < point 
-     */
-    // @Override
-    // public int compareTo(Object o)
-    // {   
-    //     if (!(o instanceof Point)){
-    //         return 1;
-    //     }
-    //     Point argPoint = (Point) o;
-    //     for (int i = 0; i < this.getDimension(); i++) {
-    //         if (this.attributes.get(i).compareTo(argPoint.attributes.get(i)) == 0)
-    //         {
-    //             continue;
-    //         }
-    //         return this.attributes.get(i).compareTo(argPoint.attributes.get(i));
-    //     }
-    //     return 0;
-    // }
-
     @Override
     public int compareTo(Point p){
         for (int i = 0; i < this.getDimension(); i++){
@@ -199,6 +175,6 @@ public class Point implements WritableComparable<Point>{
             return false;
         }
         Point temp = (Point) o;
-        return this.compareTo(temp) == 0;
+        return this.compareTo(temp) < 0.000000001 && this.compareTo(temp) > -0.000000001;
     }
 }

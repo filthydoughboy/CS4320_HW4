@@ -39,7 +39,9 @@ public class ClusterToPointReducer extends Reducer<Point, Point, Point, Point>
 			numberOfPoints++;
 		}
 		accumulatedPoint = Point.multiplyScalar(accumulatedPoint, 1/((float) numberOfPoints));
-		context.write(key, accumulatedPoint);
+		for (int i = 0; i < accumulatedArrayList.size(); i++){
+			context.write(accumulatedPoint, accumulatedArrayList.get(i));
+		}
 		ArrayList<Point> tempCentroids = KMeans.centroids;
 		int index = tempCentroids.indexOf(key);
 		tempCentroids.set(index, accumulatedPoint);

@@ -56,3 +56,8 @@ ourtest1:
 	rm -rf output/
 	rm -f centroids
 	CLASSPATH=$(CLASS_PATH) $(HADOOP) jar $(MAIN).jar $(MAIN) 2 2 student_test1/points/points1.txt output student_test1/centroids/centroids.txt
+
+ourtest2:
+	rm -rf output/
+	rm -f centroids
+	CLASSPATH=$(CLASS_PATH) $(HADOOP) jar $(MAIN).jar $(MAIN) 3 3 student_test2/points/points1.txt output student_test2/centroids/centroids.txt
